@@ -42,14 +42,52 @@ const data = {
   ]
 }
 
+const remarker = (data, hash, word) => {
+  let hashed = data.phrases
+    .map(phrase => {
+      if (phrase.hash === hash) {
+        phrase.words = phrase.words.map(w => {
+          return w.word === word 
+            ? {...w, marker: !w.marker}
+            : {...w};
+        })
+      }
+
+      return phrase;
+    })[0]
+
+  let newPhrases = data.phrases.map(phrase => 
+    phrase.hash === hash ? hashed : phrase
+  )
+
+  return {...data, phrases: newPhrases}
+}
 
 class App extends Component {
-  
+  constructor(props){
+    super(props);
+
+    this.state = {
+      data
+    }
+
+    this.remarkWord = this.remarkWord.bind(this);
+  }
+
+  remarkWord(hash, word) {
+    let data = remarker(this.state.data, hash, word);
+
+    this.setState({
+      data
+    });
+  }
+
   render() {
     return (
       <div className="App">
         <img src={logo} className="App-logo" alt="logo" />
-        <Phrases phrases={data.phrases}/>
+        <Phrases phrases={data.phrases}
+                 remarkWord={this.remarkWord}/>
       </div>
     );
   }
