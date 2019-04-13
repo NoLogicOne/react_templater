@@ -2,20 +2,24 @@ import React from 'react';
 
 import Word from "./Word/Word.js";
 
-import './Phrase.css';
+import './Phrases.css';
 
-const Phrase = ({phrase}) => {
+const Phrases = ({phrases}) => {
     
-    const createWords = () => {
+    const createWords = (phrase) => {
         return phrase.words.map((word, index) => (
             <Word key={index} 
             {...word}/> 
         ))
     }
 
+    const createPhrases = () => {
+        return phrases.map(phrase => createWords(phrase));
+    }
+
     return (
 		<div className="templater__phrase">
-            {createWords()}
+            {createPhrases()}
 		</div>
     );
 }
@@ -25,4 +29,4 @@ const Phrase = ({phrase}) => {
 //     	marker: true
 //     }
 
-export default Phrase;
+export default Phrases;
