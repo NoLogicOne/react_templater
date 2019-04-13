@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import Word from "./Word/Word.js";
+import Phrase from "./Phrase/Phrase.js";
 
 
 const data = {
@@ -20,25 +20,19 @@ const data = {
     ],
     light: 0,
     length: 0
-  }
+  },
+  keyword: "bold"
 }
 
 
 class App extends Component {
   
-  createWords() {
-    return data.phrase.words.map((word, index) => (
-      <Word key={index} 
-            word={word.word}
-            marker={word.marker}/> 
-    ))
-  }
 
   render() {
     return (
       <div className="App">
         <img src={logo} className="App-logo" alt="logo" />
-        {this.createWords()}
+        <Phrase phrase={data.phrase}/>
       </div>
     );
   }
