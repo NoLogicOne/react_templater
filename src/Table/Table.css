@@ -1,3 +1,7 @@
 .templater__table{
   
 }
+
+.templater__table_input{
+	width: 100%;
+}

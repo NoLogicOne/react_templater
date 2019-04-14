@@ -2,17 +2,20 @@ import React from 'react';
 
 import Rows from "./Rows/Rows.js";
 
-const Table = ({keywords}) => {
+const Table = ({phrases, remarkWord}) => {
 
     return (
       <table className="templater__table">
-        <tr>
-          <th>Keyword</th>
-          <th>Title</th>
-          <th>length</th>
-          <th>light</th>
-        </tr>
-        <Rows keywords={keywords}/>
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Title</th>
+            <th>length</th>
+            <th>light</th>
+          </tr>
+        </thead>
+        <Rows phrases={phrases}
+              remarkWord={remarkWord}/>
       </table>
     );
 

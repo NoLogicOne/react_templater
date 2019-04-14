@@ -2,9 +2,9 @@ import React from 'react';
 
 import Word from "./Word/Word.js";
 
-import './Phrases.css';
+import './Phrase.css';
 
-const Phrases = ({phrases, remarkWord}) => {
+const Phrase = ({phrase, remarkWord}) => {
     
     const createWords = (phrase) => {
         return phrase.words.map((word, index) => (
@@ -15,15 +15,16 @@ const Phrases = ({phrases, remarkWord}) => {
         ))
     }
 
-    const createPhrases = () => {
-        return phrases.map(phrase => createWords(phrase));
-    }
-
     return (
-		<div className="templater__phrase">
-            {createPhrases()}
-		</div>
+  		<div className="templater__phrase">
+              {createWords(phrase)}
+  		</div>
     );
 }
 
-export default Phrases;
+// Word.defaultProps = {
+//     	word: "default word",
+//     	marker: true
+//     }
+
+export default Phrase;

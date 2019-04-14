@@ -2,23 +2,16 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import Phrases from "./Phrase/Phrases.js";
 import Template from "./Template/Template.js";
 import Table from "./Table/Table.js";
 
 
 const data = {
   template: "this text #realy bold#",
-  keywords: [
-    "not bold",
-    "realy realy bold",
-    "so long fucking bold as Greate Chineese Wall - longest"
-  ], 
   phrases: [
     {
       hash: "#phrase1",
       keyword: "not bold",
-      value: "this text not bold",
       words: [
         {
           word: "this",
@@ -102,9 +95,9 @@ class App extends Component {
         <img src={logo} className="App-logo" alt="logo" />
         <Template template={this.state.data.template}
                   onChange={this.onTemplateChange} />
-        <Phrases phrases={data.phrases}
-                 remarkWord={this.remarkWord}/>
-        <Table {...this.state.data}/>
+        <Table
+          remarkWord={this.remarkWord}
+          phrases={this.state.data.phrases}/>
       </div>
     );
   }

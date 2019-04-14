@@ -1,13 +1,12 @@
-.App-logo {
-  float: right;
-  animation: App-logo-spin infinite 20s linear;
-  height: 70px;
-  /*pointer-events: none;*/
+.App {
+  text-align: center;
+  display: grid;
 }
 
-.App{
-  padding: 5%;
-  display: grid;
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 70px;
+  pointer-events: none;
 }
 
 @keyframes App-logo-spin {

@@ -1,11 +1,23 @@
 import React from 'react';
 
-const Rows = ({keywords}) => {
+import Phrase from "./Phrase/Phrase.js";
+
+
+const Rows = ({phrases, remarkWord}) => {
   
   const createRows = () => {
-    return keywords.map((keyword) => 
-      (<tr key={keyword}>
-        <td>{keyword}</td>
+    return phrases.map((phrase, idx) => 
+      (<tr key={idx}>
+        <td>
+          <input
+            className="templater__table_input"
+            onChange={e => e.target.value} 
+            value={phrase.keyword} />
+        </td>
+        <td>
+          <Phrase phrase={phrase}
+                  remarkWord={remarkWord}/>
+        </td>
       </tr>)
     )
   }
@@ -15,6 +27,10 @@ const Rows = ({keywords}) => {
       {createRows()}
     </tbody>
   )
+}
+
+Rows.defaultProps = {
+  phrases: []
 }
 
 export default Rows;
