@@ -4,6 +4,7 @@ import './App.css';
 
 import Phrases from "./Phrase/Phrases.js";
 import Template from "./Template/Template.js";
+import Table from "./Table/Table.js";
 
 
 const data = {
@@ -34,12 +35,11 @@ const data = {
         {
           word: "bold",
           marker: true
-        }
+        }, {}
       ],
       light: 0,
       length: 0
     },
-
   ]
 }
 
@@ -100,10 +100,11 @@ class App extends Component {
     return (
       <div className="App">
         <img src={logo} className="App-logo" alt="logo" />
-        <Phrases phrases={data.phrases}
-                 remarkWord={this.remarkWord}/>
         <Template template={this.state.data.template}
                   onChange={this.onTemplateChange} />
+        <Phrases phrases={data.phrases}
+                 remarkWord={this.remarkWord}/>
+        <Table {...this.state.data}/>
       </div>
     );
   }

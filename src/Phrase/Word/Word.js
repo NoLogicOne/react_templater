@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import './Word.css';
 
 const Word = ({word, marker, remarkWord, hash}) => {
-    // let _span;
 
     const createText = () => {
     	return marker 
@@ -10,24 +11,26 @@ const Word = ({word, marker, remarkWord, hash}) => {
     		: (<span>{word} </span>)
     }
 
-    const onContextMenu = (e) => {
-        e.preventDefault();
-
-        remarkWord(hash, word);
-    }
-
     return (
 		<span className="templater__word"
-              onContextMenu={onContextMenu}>
-              {/*ref={span => _span = span}>*/}
-			{createText()}
+              onContextMenu={e => {
+                e.preventDefault();
+                remarkWord(hash, word);
+              }}>
+            
+            {createText()}
 		</span>
     );
 }
 
-// Word.defaultProps = {
-//     	word: "default word",
-//     	marker: true
-//     }
+Word.propTypes = {
+    word: PropTypes.string,
+    marker: PropTypes.bool
+}
+
+Word.defaultProps = {
+    	word: "!word isn't defined!".toUpperCase(),
+    	marker: true
+    }
 
 export default Word;

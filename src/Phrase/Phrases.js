@@ -26,9 +26,4 @@ const Phrases = ({phrases, remarkWord}) => {
     );
 }
 
-// Word.defaultProps = {
-//     	word: "default word",
-//     	marker: true
-//     }
-
 export default Phrases;
