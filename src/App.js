@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import Phrases from "./Phrase/Phrases.js";
+import Template from "./Template/Template.js";
 
 
 const data = {
@@ -63,6 +64,10 @@ const remarker = (data, hash, word) => {
   return {...data, phrases: newPhrases}
 }
 
+const templateChanger = (data, value) => {
+  return {...data, template: value}
+}
+
 class App extends Component {
   constructor(props){
     super(props);
@@ -72,6 +77,7 @@ class App extends Component {
     }
 
     this.remarkWord = this.remarkWord.bind(this);
+    this.onTemplateChange = this.onTemplateChange.bind(this);
   }
 
   remarkWord(hash, word) {
@@ -79,7 +85,15 @@ class App extends Component {
 
     this.setState({
       data
-    });
+    })
+  }
+
+  onTemplateChange(value) {
+    let data = templateChanger(this.state.data, value);
+
+    this.setState({
+      data
+    })
   }
 
   render() {
@@ -88,6 +102,8 @@ class App extends Component {
         <img src={logo} className="App-logo" alt="logo" />
         <Phrases phrases={data.phrases}
                  remarkWord={this.remarkWord}/>
+        <Template template={this.state.data.template}
+                  onChange={this.onTemplateChange} />
       </div>
     );
   }
