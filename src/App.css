@@ -11,7 +11,9 @@
 }
 
 .templater__state_btn{
-  height: 30px;
+  height: 50px;
+  font-weight: bold;
+  font-size: 24px;
 }
 
 @keyframes App-logo-spin {
