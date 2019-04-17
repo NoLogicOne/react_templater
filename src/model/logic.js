@@ -75,6 +75,19 @@ const templateChanger = (data, value) => {
   return {...data, template: value}
 }
 
+const onKeywordsInputChanger = (data, keyword) => {
+  let newKeys = data.keywords.keys.map(key => 
+    key.value === keyword 
+      ? {...key, checked: !key.checked}
+      : {...key} 
+  );
+
+  let newKeywords = {...data.keywords, keys: newKeys}
+
+  return {...data, keywords: newKeywords}
+}
+
 export {data,
         remarker,
+        onKeywordsInputChanger,
         templateChanger}

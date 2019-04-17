@@ -1,17 +1,22 @@
 import React from 'react';
 
-const Keywords = ({isList, keys}) => {
+import "./Keywords.css";
+
+const Keywords = ({isList, keys, onInputChange}) => {
 
 	const creator = () => {
 		return isList 
 		? keys.map(key => {
-			return (<div key={key.value}>
-				<input type="checkbox" checked={key.checked}/>
-				<span>{key.value}</span>
-			</div>)
+			return ( 
+				<label key={key.value} htmlFor="">
+					<input type="checkbox"
+						   onChange={e => onInputChange(key.value)}
+						   checked={key.checked}/>
+					<span>{key.value}</span>
+				</label>
+			)
 		})
 		: <textarea name="keywords" id="" cols="30" rows="10"/>
-		
 	}
 
 	return (

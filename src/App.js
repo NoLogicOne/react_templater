@@ -6,7 +6,7 @@ import Template from "./Template/Template.js";
 import Table from "./Table/Table.js";
 import Keywords from "./Keywords/Keywords.js";
 
-import {data, remarker, templateChanger} from "./model/logic.js";
+import {data, remarker, templateChanger, onKeywordsInputChanger} from "./model/logic.js";
 
 
 class App extends Component {
@@ -19,6 +19,7 @@ class App extends Component {
 
     this.remarkWord = this.remarkWord.bind(this);
     this.onTemplateChange = this.onTemplateChange.bind(this);
+    this.onKeywordsInputChange = this.onKeywordsInputChange.bind(this);
   }
 
   remarkWord(hash, word) {
@@ -37,13 +38,22 @@ class App extends Component {
     })
   }
 
+  onKeywordsInputChange(keyword) {
+    let data = onKeywordsInputChanger(this.state.data, keyword);
+
+    this.setState({
+      data
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <img src={logo} className="App-logo" alt="logo" />
         <Template template={this.state.data.template}
                   onChange={this.onTemplateChange} />
-        <Keywords {...this.state.data.keywords}/>
+        <Keywords onInputChange={this.onKeywordsInputChange}
+                  {...this.state.data.keywords}/>
         <Table
           remarkWord={this.remarkWord}
           phrases={this.state.data.phrases}/>
