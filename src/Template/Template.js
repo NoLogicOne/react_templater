@@ -9,13 +9,13 @@ const Template = ({template, onChange}) => {
 				   value={template}
 				   onChange={e => onChange(e.target.value)}
 				   />
-	    	<div className="templater__template_length">
+	    	<span className="templater__template_length">
 	    		{template
 	    			.replace(/#/g, "")
 					.trim()
 	    			.length
 	    		}
-	    	</div>
+	    	</span>
 		</div>
 	);
   

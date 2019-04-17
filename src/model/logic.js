@@ -1,6 +1,19 @@
 
 const data = {
   template: "this text #realy bold#",
+  keywords: {
+    isList: true,
+    keys: [
+      {
+        checked: true,
+        value: "not bold" 
+      },
+      {
+        checked: false,
+        value: "realy bold"
+      }
+    ]
+  },
   phrases: [
     {
       hash: "#phrase1",

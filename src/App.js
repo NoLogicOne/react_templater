@@ -4,6 +4,7 @@ import './App.css';
 
 import Template from "./Template/Template.js";
 import Table from "./Table/Table.js";
+import Keywords from "./Keywords/Keywords.js";
 
 import {data, remarker, templateChanger} from "./model/logic.js";
 
@@ -42,6 +43,7 @@ class App extends Component {
         <img src={logo} className="App-logo" alt="logo" />
         <Template template={this.state.data.template}
                   onChange={this.onTemplateChange} />
+        <Keywords {...this.state.data.keywords}/>
         <Table
           remarkWord={this.remarkWord}
           phrases={this.state.data.phrases}/>
