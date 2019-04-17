@@ -87,7 +87,17 @@ const onKeywordsInputChanger = (data, keyword) => {
   return {...data, keywords: newKeywords}
 }
 
+const onKeywordsStateChanger = (data) => {
+  return {
+    ...data, 
+    keywords: {
+      ...data.keywords, 
+      isList: !data.keywords.isList}
+  }
+}
+
 export {data,
         remarker,
         onKeywordsInputChanger,
+        onKeywordsStateChanger,
         templateChanger}

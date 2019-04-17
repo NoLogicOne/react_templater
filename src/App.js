@@ -6,7 +6,13 @@ import Template from "./Template/Template.js";
 import Table from "./Table/Table.js";
 import Keywords from "./Keywords/Keywords.js";
 
-import {data, remarker, templateChanger, onKeywordsInputChanger} from "./model/logic.js";
+import {data, 
+        remarker, 
+        templateChanger,
+        onKeywordsStateChanger, 
+        onKeywordsInputChanger} from "./model/logic.js";
+
+const {log} = console;
 
 
 class App extends Component {
@@ -19,6 +25,7 @@ class App extends Component {
 
     this.remarkWord = this.remarkWord.bind(this);
     this.onTemplateChange = this.onTemplateChange.bind(this);
+    this.onKeywordsStateChange = this.onKeywordsStateChange.bind(this);
     this.onKeywordsInputChange = this.onKeywordsInputChange.bind(this);
   }
 
@@ -46,10 +53,22 @@ class App extends Component {
     })
   }
 
+  onKeywordsStateChange(e){
+    let data = onKeywordsStateChanger(this.state.data);
+    log(data);
+    this.setState({data});
+  }
+
   render() {
     return (
       <div className="App">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={logo} 
+             className="App-logo" 
+             alt="logo" />
+        <button className="templater__state_btn"
+             onClick={this.onKeywordsStateChange}>
+             Change state
+        </button>
         <Template template={this.state.data.template}
                   onChange={this.onTemplateChange} />
         <Keywords onInputChange={this.onKeywordsInputChange}

@@ -7,6 +7,11 @@
   animation: App-logo-spin infinite 20s linear;
   height: 70px;
   pointer-events: none;
+  display: inline-block;
+}
+
+.templater__state_btn{
+  height: 30px;
 }
 
 @keyframes App-logo-spin {
