@@ -42,6 +42,8 @@ const data = {
   ]
 }
 
+/*callback he needs to get the 
+phrase object and an array with the arguments*/
 const _phraseExecute = (data, hash, callback, ...args) => {
   let hashed = data.phrases
     .map(phrase => {
@@ -49,13 +51,12 @@ const _phraseExecute = (data, hash, callback, ...args) => {
         return callback(phrase, args);
       }
       return phrase;
-    })[0]
+    })
 
-  let newPhrases = data.phrases.map(phrase => 
-    phrase.hash === hash ? hashed : phrase
-  )
-
-  return {...data, phrases: newPhrases}
+  return {
+    ...data,
+    phrases: hashed
+  }
 }
 
 const remarker = (data, hash, word) => {
