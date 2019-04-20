@@ -1,5 +1,5 @@
-
-const data = {
+const MAX_LENGTH = 35;
+export const data = {
   template: "this text #realy bold#",
   keywords: {
     isList: true,
@@ -36,15 +36,15 @@ const data = {
           marker: true
         }, {}
       ],
-      light: 0,
-      length: 0
+      light: "50%",
+      length: 30
     },
   ]
 }
 
 /*callback he needs to get the 
 phrase object and an array with the arguments*/
-const _phraseExecute = (data, hash, callback, ...args) => {
+export const _phraseExecute = (data, hash, callback, ...args) => {
   let hashed = data.phrases
     .map(phrase => {
       if (phrase.hash === hash) {
@@ -59,7 +59,7 @@ const _phraseExecute = (data, hash, callback, ...args) => {
   }
 }
 
-const remarker = (data, hash, word) => {
+export const remarker = (data, hash, word) => {
   let callback = (phrase, word) => {
     phrase.words = phrase.words.map(w => {
       return w.word === word[0] 
@@ -72,11 +72,11 @@ const remarker = (data, hash, word) => {
   return _phraseExecute(data, hash, callback, word);
 }
 
-const templateChanger = (data, value) => {
+export const templateChanger = (data, value) => {
   return {...data, template: value}
 }
 
-const onKeywordsInputChanger = (data, keyword) => {
+export const onKeywordsInputChanger = (data, keyword) => {
   let newKeys = data.keywords.keys.map(key => 
     key.value === keyword 
       ? {...key, checked: !key.checked}
@@ -88,7 +88,7 @@ const onKeywordsInputChanger = (data, keyword) => {
   return {...data, keywords: newKeywords}
 }
 
-const onKeywordsStateChanger = (data) => {
+export const onKeywordsStateChanger = (data) => {
   return {
     ...data, 
     keywords: {
@@ -97,8 +97,33 @@ const onKeywordsStateChanger = (data) => {
   }
 }
 
-export {data,
-        remarker,
-        onKeywordsInputChanger,
-        onKeywordsStateChanger,
-        templateChanger}
+export const pasteKeywordInTemplate = (keyword, template, max = MAX_LENGTH) => {
+  let result = template
+    .replace(/#.*#/i, keyword)
+    .trim();
+  
+  return (result > 35) ? template.replace(/#/g, "") : result;
+}
+
+export const getMarked = (word, phrase) => {
+  return phrase.split(" ").contains(word);
+}
+
+export const createPhrase = (keyword, template) => {
+  let words = pasteKeywordInTemplate(keyword, template)
+    .split(" ")
+    .map(word => ({word, marked: getMarked(word, keyword)}) );
+  
+
+  return {
+    "hash": Date.now(),
+    keyword,
+    words,
+    light: 30,
+    length: 35
+  }
+}
+
+export const pastePhraseInTable = (data, keyword, template) => {
+  return data.phrases.push(createPhrase(keyword, template));
+}

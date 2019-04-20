@@ -16,6 +16,10 @@ const Template = ({template, onChange}) => {
 	    			.length
 	    		}
 	    	</span>
+	    	<input type="submit" 
+	    		   value="MIX"
+	    		   onSubmit={e => e}
+	    	       className="templater__template_mix"/>
 		</div>
 	);
   
