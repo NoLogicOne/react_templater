@@ -48,14 +48,17 @@ export const _phraseExecute = (data, hash, callback, ...args) => {
   let hashed = data.phrases
     .map(phrase => {
       if (phrase.hash === hash) {
-        return callback(phrase, args);
+        let res = callback(phrase, args);
+
+        return res;
       }
       return phrase;
     })
 
+
   return {
     ...data,
-    phrases: hashed
+    phrases: hashed.filter(phrase => phrase !== null)
   }
 }
 
@@ -101,7 +104,7 @@ export const pasteKeywordInTemplate = (keyword, template, max = MAX_LENGTH) => {
   let result = template
     .replace(/#.*#/i, keyword)
     .trim();
-  
+   
   return (result > 35) ? template.replace(/#/g, "") : result;
 }
 
@@ -125,5 +128,8 @@ export const createPhrase = (keyword, template) => {
 }
 
 export const pastePhraseInTable = (data, keyword, template) => {
-  return data.phrases.push(createPhrase(keyword, template));
+  return{
+    ...data,
+    phrases: data.phrases.push(createPhrase(keyword, template))
+  } 
 }
