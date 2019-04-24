@@ -61,6 +61,39 @@ describe("templateChanger", () => {
 	})
 })
 
+describe("onKeywordsInputChanger", () => {
+	const {onKeywordsInputChanger} = F;
+
+	it("can checked", () => {
+		let d = createTestedData();
+
+		d = onKeywordsInputChanger(d, "not bold");
+
+		let expected = false;
+
+		expect(d.keywords.keys[0].checked).toEqual(expected);
+	})
+})
+
+describe("pasteKeywordInTemplate", () => {
+	const {pasteKeywordInTemplate} = F;
+
+	it("correct paste short phrase", () => {
+		let expected     = "it is not bold";
+		let testingValue = pasteKeywordInTemplate("not", "it is #realy# bold");
+
+		expect(testingValue).toEqual(expected);
+	})
+
+	it("correct paste long phrase", () => {
+		let expected     = "it is not bold";
+		let testingValue = pasteKeywordInTemplate("not".repeat(18), "it is #not# bold", 35);
+
+		expect(testingValue).toEqual(expected);
+	})
+})
+
+
 
 const createTestedData = () => {
 	return {

@@ -42,7 +42,8 @@ export const data = {
   ]
 }
 
-/*callback he needs to get the 
+/*tested*/
+/*callback needs to get the 
 phrase object and an array with the arguments*/
 export const _phraseExecute = (data, hash, callback, ...args) => {
   let hashed = data.phrases
@@ -58,10 +59,12 @@ export const _phraseExecute = (data, hash, callback, ...args) => {
 
   return {
     ...data,
+    // filter fr create function, that delete null-phrase
     phrases: hashed.filter(phrase => phrase !== null)
   }
 }
 
+/*tested*/
 export const remarker = (data, hash, word) => {
   let callback = (phrase, word) => {
     phrase.words = phrase.words.map(w => {
@@ -75,10 +78,12 @@ export const remarker = (data, hash, word) => {
   return _phraseExecute(data, hash, callback, word);
 }
 
+/*tested*/
 export const templateChanger = (data, value) => {
   return {...data, template: value}
 }
 
+/*tested*/
 export const onKeywordsInputChanger = (data, keyword) => {
   let newKeys = data.keywords.keys.map(key => 
     key.value === keyword 
@@ -91,6 +96,7 @@ export const onKeywordsInputChanger = (data, keyword) => {
   return {...data, keywords: newKeywords}
 }
 
+/*probably it useless, cause my wife reject if future*/
 export const onKeywordsStateChanger = (data) => {
   return {
     ...data, 
@@ -100,12 +106,14 @@ export const onKeywordsStateChanger = (data) => {
   }
 }
 
+
+/*tested*/
 export const pasteKeywordInTemplate = (keyword, template, max = MAX_LENGTH) => {
   let result = template
     .replace(/#.*#/i, keyword)
     .trim();
-   
-  return (result > 35) ? template.replace(/#/g, "") : result;
+
+  return (result.length > max) ? template.replace(/#/g, "") : result;
 }
 
 export const getMarked = (word, phrase) => {
