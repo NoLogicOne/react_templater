@@ -12,6 +12,7 @@ const Word = ({word, marker, remarkWord, hash}) => {
 
     const onContextMenu = (e) => {
         e.preventDefault();
+        console.log(hash, " ", word)
 
         remarkWord(hash, word);
     }

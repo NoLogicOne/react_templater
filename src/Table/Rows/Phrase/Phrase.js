@@ -4,12 +4,12 @@ import Word from "./Word/Word.js";
 
 import './Phrase.css';
 
-const Phrase = ({phrase, remarkWord}) => {
+const Phrase = ({phrase, hash, remarkWord}) => {
     
     const createWords = (phrase) => {
         return phrase.words.map((word, index) => (
             <Word key={index}
-                  hash={phrase.hash}
+                  hash={hash}
                   remarkWord={remarkWord}
                   {...word}/>
         ))

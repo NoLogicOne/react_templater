@@ -16,7 +16,7 @@ const reducer = combineReducers(reducers, data)
 
 const store = createStore(reducer)
 store.dispatch(Creators.remarkWord("phrase123457", "text"))
-store.dispatch(Creators.editTemplate("text"))
+// store.dispatch(Creators.editTemplate("text"))
 console.dir(store.getState())
 
 ReactDOM.render(

@@ -23,48 +23,32 @@ class App extends Component {
   constructor(props){
     super(props);
 
-    // this.state = {
-    //   data
-    // }
-    // this.remarkWord = this.remarkWord.bind(this);
-    // this.onTemplateChange = this.onTemplateChange.bind(this);
     this.onKeywordsInputChange = this.onKeywordsInputChange.bind(this);
   }
 
-  // remarkWord(hash, word) {
-  //   let data = remarker(this.state.data, hash, word);
-
-  //   this.setState({
-  //     data
-  //   })
-  // }
-
-  // onTemplateChange = (value) => {
-  //   this.props.onTemplateChange(value)
-  // }
-
   onKeywordsInputChange(keyword) {
     let data = onKeywordsInputChanger(this.props.data, keyword);
-
-    // this.setState({
-    //   data
-    // })
   }
 
   render() {
-    let {data} = this.props
+    let {data, //state object
+         remarkWord, //bolding words
+         fillImport, //fill import_area
+         onKeywordChange, //edit keywords in phrases
+         onTemplateChange} = this.props
+    
     return (
       <div className="App">
         <img src={logo} 
              className="App-logo" 
              alt="logo" />
-        <Keywords onInputChange={this.onKeywordsInputChange}
+        <Keywords onInputChange={fillImport}
                   import_area={data.import_area}/>
         <Template template={data.template}
-                  onChange={this.props.onTemplateChange} />
+                  onChange={onTemplateChange} />
         <Table
-          // remarkWord={this.remarkWord}
-          remarkWord={e=>e}
+          remarkWord={remarkWord}
+          onKeywordChange={onKeywordChange}
           phrases={data.phrases}/>
       </div>
     );
@@ -78,6 +62,15 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onTemplateChange: (value) => {
     dispatch(AC.editTemplate(value))
+  },
+  remarkWord: (hash, word) => {
+    dispatch(AC.remarkWord(hash, word))
+  },
+  onKeywordChange: (hash, value, template) => {
+    dispatch(AC.keywordChange(hash, value, template))
+  },
+  fillImport: (value) => {
+    dispatch(AC.fillImport(value))
   }
 })
 

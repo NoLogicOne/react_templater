@@ -2,8 +2,8 @@ import React from 'react';
 
 import Rows from "./Rows/Rows.js";
 
-const Table = ({phrases, remarkWord}) => {
-
+const Table = (props) => {
+    console.log(props)
     return (
       <table className="templater__table">
         <thead>
@@ -14,8 +14,7 @@ const Table = ({phrases, remarkWord}) => {
             <th>light</th>
           </tr>
         </thead>
-        <Rows phrases={phrases}
-              remarkWord={remarkWord}/>
+        <Rows {...props}/>
       </table>
     );
 

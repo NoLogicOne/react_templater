@@ -10,6 +10,7 @@ const Keywords = ({import_area, onInputChange}) => {
 					  id="" 
 					  cols="30" 
 					  rows="10"
+					  onChange={e => onInputChange(e.target.value)}
 					  value={import_area}/>
 		)
 	}

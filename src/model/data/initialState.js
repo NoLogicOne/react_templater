@@ -3,6 +3,7 @@ export const data = {
   template: "this text #re!aly bold#",
   phrases: {
     phrase123456: {
+      based_template: "this text #re!aly bold#",
       keyword: "simple bold",
       colored: true,
       minuses: "-fear",
@@ -28,6 +29,7 @@ export const data = {
       ]
     },
     phrase123457: {
+      based_template: "this text #re!aly bold#",
       keyword: "not bold",
       colored: true,
       minuses: "-fear",
@@ -53,6 +55,7 @@ export const data = {
       ]
     },
     phrase123458: {
+      based_template: "this text #re!aly bold#",
       keyword: "FUCK!!!",
       colored: false,
       minuses: "-fear",
