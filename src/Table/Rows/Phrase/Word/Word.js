@@ -1,7 +1,7 @@
 import React from 'react';
 import './Word.css';
 
-const Word = ({word, marker, remarkWord, hash}) => {
+const Word = ({word, marker, remarkWord, hash, template}) => {
     // let _span;
 
     const createText = () => {
@@ -12,15 +12,12 @@ const Word = ({word, marker, remarkWord, hash}) => {
 
     const onContextMenu = (e) => {
         e.preventDefault();
-        console.log(hash, " ", word)
-
-        remarkWord(hash, word);
+        remarkWord(hash, word, template);
     }
 
     return (
 		<span className="templater__word"
               onContextMenu={onContextMenu}>
-              {/*ref={span => _span = span}>*/}
 			{createText()}
 		</span>
     );

@@ -6,7 +6,6 @@ const Rows = ({phrases, onKeywordChange, remarkWord}) => {
   let row_array = [];
 
   const createRow = (phrase, idx) => {
-    console.log("phrase - ", phrase)
     return (
       <tr key={idx}>
         <td className="templater__table_keyword">
@@ -31,7 +30,6 @@ const Rows = ({phrases, onKeywordChange, remarkWord}) => {
   }
 
   const createRows = () => {
-    let i = 0;
     for (let phrase in phrases) {
       row_array.push(createRow(phrases[phrase], phrase))
     }

@@ -10,6 +10,7 @@ const Phrase = ({phrase, hash, remarkWord}) => {
         return phrase.words.map((word, index) => (
             <Word key={index}
                   hash={hash}
+                  template={phrase.based_template}
                   remarkWord={remarkWord}
                   {...word}/>
         ))

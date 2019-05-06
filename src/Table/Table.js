@@ -3,7 +3,6 @@ import React from 'react';
 import Rows from "./Rows/Rows.js";
 
 const Table = (props) => {
-    console.log(props)
     return (
       <table className="templater__table">
         <thead>

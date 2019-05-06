@@ -1,10 +1,11 @@
 import * as types from "../constants/ActionTypes.js"
 
-export function remarkWord(hash, word) {
+export function remarkWord(hash, word, based_template) {
 	return {
 		type: types.REMARK_WORD,
 		hash,
-		word
+		word,
+		based_template
 	}
 }
 
@@ -23,6 +24,7 @@ export function editTemplate(value) {
 }
 
 export function keywordChange(hash, value, based_template) {
+	console.log("AC - ", based_template)
 	return {
 		type: types.KEYWORD_CHANGE,
 		hash,

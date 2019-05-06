@@ -63,11 +63,11 @@ const mapDispatchToProps = dispatch => ({
   onTemplateChange: (value) => {
     dispatch(AC.editTemplate(value))
   },
-  remarkWord: (hash, word) => {
-    dispatch(AC.remarkWord(hash, word))
+  remarkWord: (hash, word, based_template) => {
+    dispatch(AC.remarkWord(hash, word, based_template))
   },
-  onKeywordChange: (hash, value, template) => {
-    dispatch(AC.keywordChange(hash, value, template))
+  onKeywordChange: (hash, value, b_template) => {
+    dispatch(AC.keywordChange(hash, value, b_template))
   },
   fillImport: (value) => {
     dispatch(AC.fillImport(value))
