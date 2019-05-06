@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+
 import Template from "./Template/Template.js";
 import Table from "./Table/Table.js";
 import Keywords from "./Keywords/Keywords.js";
 
+import * as AC from "./model/actions/phraseActions.js"
+
 import {data, 
-        remarker, 
         templateChanger,
         onKeywordsStateChanger, 
         onKeywordsInputChanger} from "./model/logic.js";
@@ -19,66 +23,63 @@ class App extends Component {
   constructor(props){
     super(props);
 
-    this.state = {
-      data
-    }
-
-    this.remarkWord = this.remarkWord.bind(this);
-    this.onTemplateChange = this.onTemplateChange.bind(this);
-    this.onKeywordsStateChange = this.onKeywordsStateChange.bind(this);
+    // this.state = {
+    //   data
+    // }
+    // this.remarkWord = this.remarkWord.bind(this);
+    // this.onTemplateChange = this.onTemplateChange.bind(this);
     this.onKeywordsInputChange = this.onKeywordsInputChange.bind(this);
   }
 
-  remarkWord(hash, word) {
-    let data = remarker(this.state.data, hash, word);
+  // remarkWord(hash, word) {
+  //   let data = remarker(this.state.data, hash, word);
 
-    this.setState({
-      data
-    })
-  }
+  //   this.setState({
+  //     data
+  //   })
+  // }
 
-  onTemplateChange(value) {
-    let data = templateChanger(this.state.data, value);
-
-    this.setState({
-      data
-    })
-  }
+  // onTemplateChange = (value) => {
+  //   this.props.onTemplateChange(value)
+  // }
 
   onKeywordsInputChange(keyword) {
-    let data = onKeywordsInputChanger(this.state.data, keyword);
+    let data = onKeywordsInputChanger(this.props.data, keyword);
 
-    this.setState({
-      data
-    })
-  }
-
-  onKeywordsStateChange(e){
-    let data = onKeywordsStateChanger(this.state.data);
-    log(data);
-    this.setState({data});
+    // this.setState({
+    //   data
+    // })
   }
 
   render() {
+    let {data} = this.props
     return (
       <div className="App">
         <img src={logo} 
              className="App-logo" 
              alt="logo" />
-        <button className="templater__state_btn"
-             onClick={this.onKeywordsStateChange}>
-             Change state
-        </button>
-        <Template template={this.state.data.template}
-                  onChange={this.onTemplateChange} />
         <Keywords onInputChange={this.onKeywordsInputChange}
-                  {...this.state.data.keywords}/>
+                  import_area={data.import_area}/>
+        <Template template={data.template}
+                  onChange={this.props.onTemplateChange} />
         <Table
-          remarkWord={this.remarkWord}
-          phrases={this.state.data.phrases}/>
+          // remarkWord={this.remarkWord}
+          remarkWord={e=>e}
+          phrases={data.phrases}/>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  data: state
+})
+
+const mapDispatchToProps = dispatch => ({
+  onTemplateChange: (value) => {
+    dispatch(AC.editTemplate(value))
+  }
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

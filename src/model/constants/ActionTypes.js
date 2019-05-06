@@ -1,0 +1,7 @@
+export const FILL_IMPORT = "FILL_IMPORT"
+export const EDIT_TEMPLATE = "EDIT_TEMPLATE"
+export const GENERATE_TABLE = "GENERATE_TABLE"
+export const KEYWORD_CHANGE = "KEYWORD_CHANGE"
+export const REMARK_WORD = "REMARK_WORD"
+export const COLOR_PHRASE = "COLOR_PHRASE"
+export const FILL_EXPORT = "FILL_EXPORT"

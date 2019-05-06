@@ -37,7 +37,8 @@ export const data = {
         }, {}
       ],
       light: "50%",
-      length: 30
+      length: 30,
+      checked: false
     },
   ]
 }
@@ -65,18 +66,18 @@ export const _phraseExecute = (data, hash, callback, ...args) => {
 }
 
 /*tested*/
-export const remarker = (data, hash, word) => {
-  let callback = (phrase, word) => {
-    phrase.words = phrase.words.map(w => {
-      return w.word === word[0] 
-        ? {...w, marker: !w.marker}
-        : {...w};
-    })
-    return phrase;
-  }
+// export const remarker = (data, hash, word) => {
+//   let callback = (phrase, word) => {
+//     phrase.words = phrase.words.map(w => {
+//       return w.word === word[0] 
+//         ? {...w, marker: !w.marker}
+//         : {...w};
+//     })
+//     return phrase;
+//   }
 
-  return _phraseExecute(data, hash, callback, word);
-}
+//   return _phraseExecute(data, hash, callback, word);
+// }
 
 /*tested*/
 export const templateChanger = (data, value) => {
@@ -96,7 +97,7 @@ export const onKeywordsInputChanger = (data, keyword) => {
   return {...data, keywords: newKeywords}
 }
 
-/*probably it useless, cause my wife reject if future*/
+/*probably it useless, cause my wife reject it future*/
 export const onKeywordsStateChanger = (data) => {
   return {
     ...data, 

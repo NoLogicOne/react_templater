@@ -2,12 +2,12 @@ import React from 'react';
 
 import Phrase from "./Phrase/Phrase.js";
 
-
 const Rows = ({phrases, remarkWord}) => {
-  
-  const createRows = () => {
-    return phrases.map((phrase, idx) => 
-      (<tr key={idx}>
+  let row_array = [];
+
+  const createRow = (phrase, idx) => {
+    return (
+      <tr key={idx}>
         <td className="templater__table_keyword">
           <input
             className="templater__table_input"
@@ -24,8 +24,17 @@ const Rows = ({phrases, remarkWord}) => {
         <td className="templater__table_ligth">
           {phrase.light}
         </td>
-      </tr>)
-    )
+      </tr>
+      )
+  }
+
+  const createRows = () => {
+    let i = 0;
+    for (let phrase in phrases) {
+      row_array.push(createRow(phrases[phrase], i++))
+    }
+
+    return row_array.map(curr => curr)
   }
 
   return (

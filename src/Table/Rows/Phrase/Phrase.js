@@ -8,10 +8,10 @@ const Phrase = ({phrase, remarkWord}) => {
     
     const createWords = (phrase) => {
         return phrase.words.map((word, index) => (
-            <Word key={index} 
+            <Word key={index}
                   hash={phrase.hash}
                   remarkWord={remarkWord}
-                  {...word}/> 
+                  {...word}/>
         ))
     }
 
@@ -21,10 +21,5 @@ const Phrase = ({phrase, remarkWord}) => {
   		</div>
     );
 }
-
-// Word.defaultProps = {
-//     	word: "default word",
-//     	marker: true
-//     }
 
 export default Phrase;
