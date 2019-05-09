@@ -5,7 +5,6 @@ import {createStore, combineReducers} from 'redux'
 
 import * as reducers from "./model/reducer.js"
 import {data} from "./model/data/initialState.js"
-import * as Creators from "./model/actions/phraseActions.js"
 
 import App from './App'
 import * as serviceWorker from './serviceWorker'

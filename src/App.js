@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 
 import Template from "./Template/Template.js";
@@ -11,22 +10,7 @@ import Keywords from "./Keywords/Keywords.js";
 
 import * as AC from "./model/actions/phraseActions.js"
 
-import {data, 
-        templateChanger,
-        onKeywordsInputChanger} from "./model/logic.js";
-
-const {log} = console;
-
 class App extends Component {
-  constructor(props){
-    super(props);
-
-    this.onKeywordsInputChange = this.onKeywordsInputChange.bind(this);
-  }
-
-  onKeywordsInputChange(keyword) {
-    let data = onKeywordsInputChanger(this.props.data, keyword);
-  }
 
   render() {
     let {data, //state object
@@ -36,7 +20,7 @@ class App extends Component {
          generateTable, //click the Mix button
          colorPhrase, //click checkbox in rows
          onTemplateChange} = this.props
-    
+
     return (
       <div className="App">
         <img src={logo} 
@@ -55,6 +39,7 @@ class App extends Component {
           phrases={data.phrases}/>
         <textarea
           rows="20"
+          onChange={e=>e}
           value={data.export_area}
         />
       </div>
@@ -66,26 +51,35 @@ const mapStateToProps = state => ({
   data: state
 })
 
-const mapDispatchToProps = dispatch => ({
-  onTemplateChange: (value) => {
-    dispatch(AC.editTemplate(value))
-  },
-  remarkWord: (hash, word, based_template) => {
-    dispatch(AC.remarkWord(hash, word, based_template))
-  },
-  onKeywordChange: (hash, value, b_template) => {
-    dispatch(AC.keywordChange(hash, value, b_template))
-  },
-  fillImport: (value) => {
-    dispatch(AC.fillImport(value))
-  },
-  generateTable: (input_area, template) => {
-    dispatch(AC.generateTable(input_area, template))
-  },
-  colorPhrase: (hash) => {
-    dispatch(AC.colorPhrase(hash))
+const mergeProps = (stateProps, dispatchProps) => {
+  let {data} = stateProps
+  let {dispatch} = dispatchProps
+
+  return {
+    data,
+    onTemplateChange: (value) => {
+      dispatch(AC.editTemplate(value))
+    },
+    remarkWord: (hash, word, based_template) => {
+      dispatch(AC.remarkWord(hash, word, based_template))
+    },
+    onKeywordChange: (hash, value, b_template) => {
+      dispatch(AC.keywordChange(hash, value, b_template))
+    },
+    fillImport: (value) => {
+      dispatch(AC.fillImport(value))
+    },
+    generateTable: (input_area, template) => {
+      dispatch(AC.generateTable(input_area, template))
+    },
+    colorPhrase: (hash) => {
+      dispatch(AC.colorPhrase(data.phrases, hash))
+    }
   }
-})
+}
 
+export default connect(
+  mapStateToProps, 
+  null,
+  mergeProps)(App);
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);

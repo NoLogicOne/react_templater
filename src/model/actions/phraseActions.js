@@ -40,9 +40,10 @@ export function generateTable(input_area, based_template){
 	}
 }
 
-export function colorPhrase(hash){
+export function colorPhrase(phrases, hash){
 	return {
 		type: types.COLOR_PHRASE,
-		hash
+		hash,
+		phrases
 	}
 }

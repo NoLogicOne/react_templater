@@ -4,9 +4,10 @@ import * as types from "./constants/ActionTypes.js"
 export const phrases = (state = data.phrases, action) => {
 	let {hash, value, word, based_template, input_area} = action
 	let result
+
 	switch (action.type) {
 		case types.REMARK_WORD: 
-			let result = _phraseExecute(state, hash, (phrase) => {
+			result = _phraseExecute(state, hash, (phrase) => {
 				return {
 					...phrase,
 					words: phrase.words.map(w => {
@@ -72,12 +73,31 @@ export const template = (state = data.template, action) => {
 }
 
 export const export_area = (state = data.export_area, action) => {
-	let {hash} = action
+	let {hash, phrases} = action
 
 	switch (action.type) {
 		case types.COLOR_PHRASE:
-			return state 
-			// + "\n" + phrases[hash].keyword + " " + phrases[hash].minuses
+			let phrasesArray = []
+			
+			phrases[hash] = {
+				...phrases[hash],
+				colored: !phrases[hash].colored
+			}
+
+			for(let key in phrases) {
+				phrasesArray.push(phrases[key])
+			}
+
+			return phrasesArray
+				.filter(p => p.colored)
+				.reduce((acc, phrase) => {
+					return acc 
+						+ phrase.keyword
+						+ " "
+						+ phrase.minuses
+						+ "\n"
+				}, "")
+				.trim()
 
 		default:
 			return state
@@ -150,7 +170,7 @@ const createPhrases = (input_area, template) => {
 
 const hashCode = str => {
     let hash = 0;
-    if (str.length == 0) {
+    if (str.length === 0) {
         return hash;
     }
     for (var i = 0; i < str.length; i++) {

@@ -1,8 +1,6 @@
 import React from 'react';
 import './Template.css';
 
-const {log} = console
-
 const Template = ({template, onChange, generateTable, import_area}) => {
 	let onButtonClick = (e) => {
 		e.preventDefault()
