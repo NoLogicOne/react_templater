@@ -15,6 +15,7 @@ const Template = ({template, onChange, generateTable, import_area}) => {
 	    	<span className="templater__template_length">
 	    		{template
 	    			.replace(/#/g, "")
+	    			.replace(/(!|\?|\.)$/, "")
 					.trim()
 	    			.length
 	    		}
