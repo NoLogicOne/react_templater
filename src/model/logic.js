@@ -1,84 +1,3 @@
-const MAX_LENGTH = 35;
-export const data = {
-  template: "this text #realy bold#",
-  keywords: {
-    isList: true,
-    keys: [
-      {
-        checked: true,
-        value: "not bold" 
-      },
-      {
-        checked: false,
-        value: "realy bold"
-      }
-    ]
-  },
-  phrases: [
-    {
-      hash: "#phrase1",
-      keyword: "not bold",
-      words: [
-        {
-          word: "this",
-          marker: false
-        },
-        {
-          word: "text",
-          marker: true
-        },
-        {
-          word: "not",
-          marker: true
-        },
-        {
-          word: "bold",
-          marker: true
-        }, {}
-      ],
-      light: "50%",
-      length: 30,
-      checked: false
-    },
-  ]
-}
-
-/*tested*/
-/*callback needs to get the 
-phrase object and an array with the arguments*/
-export const _phraseExecute = (data, hash, callback, ...args) => {
-  let hashed = data.phrases
-    .map(phrase => {
-      if (phrase.hash === hash) {
-        let res = callback(phrase, args);
-
-        return res;
-      }
-      return phrase;
-    })
-
-
-  return {
-    ...data,
-    // filter fr create function, that delete null-phrase
-    phrases: hashed.filter(phrase => phrase !== null)
-  }
-}
-
-/*tested*/
-// export const remarker = (data, hash, word) => {
-//   let callback = (phrase, word) => {
-//     phrase.words = phrase.words.map(w => {
-//       return w.word === word[0] 
-//         ? {...w, marker: !w.marker}
-//         : {...w};
-//     })
-//     return phrase;
-//   }
-
-//   return _phraseExecute(data, hash, callback, word);
-// }
-
 /*tested*/
 export const templateChanger = (data, value) => {
   return {...data, template: value}
@@ -109,7 +28,7 @@ export const onKeywordsStateChanger = (data) => {
 
 
 /*tested*/
-export const pasteKeywordInTemplate = (keyword, template, max = MAX_LENGTH) => {
+export const pasteKeywordInTemplate = (keyword, template, max = 35) => {
   let result = template
     .replace(/#.*#/i, keyword)
     .trim();

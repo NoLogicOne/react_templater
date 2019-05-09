@@ -2,7 +2,7 @@ import {data} from "./data/initialState.js"
 import * as types from "./constants/ActionTypes.js" 
 
 export const phrases = (state = data.phrases, action) => {
-	let {hash, value, word, based_template} = action
+	let {hash, value, word, based_template, input_area} = action
 	let result
 	switch (action.type) {
 		case types.REMARK_WORD: 
@@ -29,6 +29,16 @@ export const phrases = (state = data.phrases, action) => {
 			result = _setTitle(result, hash, based_template)
 			return setPhraseDepencies(result, hash, based_template)
 		
+		case types.GENERATE_TABLE:
+			result = createPhrases(input_area, based_template)
+			
+			for (let key in result) {
+				result = _setTitle(result, key, result[key].based_template)
+				result = setPhraseDepencies(result, key, result[key].based_template)
+			}
+
+			return result
+
 		default:
 			return state
 	}
@@ -71,6 +81,52 @@ const _phraseExecute = (phrases, hash, callback, ...args) => {
   hashed[hash] = callback(hashed[hash], ...args)
 
   return hashed
+}
+
+const createPhrase = (keyword, template) => {
+	let result = {}
+	let phrase = {
+		based_template: template,
+		keyword,
+		colored: false,
+		minuses: "-nothing",
+		length: 0,
+		light: 0,
+		words: []
+	}
+
+	result["p" + hashCode(keyword)] = phrase
+	return result
+}
+
+const createPhrases = (input_area, template) => {
+	let keywords = input_area
+		.split(/(\n|,)/g)
+		.filter(k => k !== undefined)
+		.filter(k => k !== null)
+		.filter(k => k !== ",")
+		.map(k => k.trim())
+		.filter(k => k !== "")
+
+	return keywords.reduce((phrases, keyword) => {
+		let newPhrase = createPhrase(keyword, template)
+		return {
+			...phrases,
+			...newPhrase
+		}
+	}, {})
+}
+const hashCode = str => {
+    let hash = 0;
+    if (str.length == 0) {
+        return hash;
+    }
+    for (var i = 0; i < str.length; i++) {
+        let char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
 }
 
 const setPhraseDepencies = (phrases, hash, based_template) => {
@@ -150,15 +206,5 @@ const _setLight = (phrases, hash) => {
 	})
 }
 
-const hashCode = str => {
-    let hash = 0;
-    if (str.length == 0) {
-        return hash;
-    }
-    for (var i = 0; i < str.length; i++) {
-        let char = str.charCodeAt(i);
-        hash = ((hash << 5) - hash) + char;
-        hash = hash & hash; // Convert to 32bit integer
-    }
-    return hash;
-}
+
+

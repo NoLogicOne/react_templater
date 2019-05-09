@@ -24,11 +24,18 @@ export function editTemplate(value) {
 }
 
 export function keywordChange(hash, value, based_template) {
-	console.log("AC - ", based_template)
 	return {
 		type: types.KEYWORD_CHANGE,
 		hash,
 		value,
+		based_template
+	}
+}
+
+export function generateTable(input_area, based_template){
+	return {
+		type: types.GENERATE_TABLE,
+		input_area,
 		based_template
 	}
 }

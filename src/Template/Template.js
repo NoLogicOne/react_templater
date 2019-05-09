@@ -1,8 +1,13 @@
 import React from 'react';
 import './Template.css';
 
-const Template = ({template, onChange}) => {
+const {log} = console
 
+const Template = ({template, onChange, generateTable, import_area}) => {
+	let onButtonClick = (e) => {
+		e.preventDefault()
+		generateTable(import_area, template)
+	}
 	return (
 		<div className="templater__template">
 			<input className="templater__template_input"
@@ -18,7 +23,7 @@ const Template = ({template, onChange}) => {
 	    	</span>
 	    	<input type="submit" 
 	    		   value="MIX"
-	    		   onSubmit={e => e}
+	    		   onClick={onButtonClick}
 	    	       className="templater__template_mix"/>
 		</div>
 	);

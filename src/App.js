@@ -13,11 +13,9 @@ import * as AC from "./model/actions/phraseActions.js"
 
 import {data, 
         templateChanger,
-        onKeywordsStateChanger, 
         onKeywordsInputChanger} from "./model/logic.js";
 
 const {log} = console;
-
 
 class App extends Component {
   constructor(props){
@@ -35,6 +33,7 @@ class App extends Component {
          remarkWord, //bolding words
          fillImport, //fill import_area
          onKeywordChange, //edit keywords in phrases
+         generateTable, //click the Mix button
          onTemplateChange} = this.props
     
     return (
@@ -45,6 +44,8 @@ class App extends Component {
         <Keywords onInputChange={fillImport}
                   import_area={data.import_area}/>
         <Template template={data.template}
+                  import_area={data.import_area}
+                  generateTable={generateTable}
                   onChange={onTemplateChange} />
         <Table
           remarkWord={remarkWord}
@@ -71,6 +72,9 @@ const mapDispatchToProps = dispatch => ({
   },
   fillImport: (value) => {
     dispatch(AC.fillImport(value))
+  },
+  generateTable: (input_area, template) => {
+    dispatch(AC.generateTable(input_area, template))
   }
 })
 
