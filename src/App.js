@@ -34,6 +34,7 @@ class App extends Component {
          fillImport, //fill import_area
          onKeywordChange, //edit keywords in phrases
          generateTable, //click the Mix button
+         colorPhrase, //click checkbox in rows
          onTemplateChange} = this.props
     
     return (
@@ -50,7 +51,12 @@ class App extends Component {
         <Table
           remarkWord={remarkWord}
           onKeywordChange={onKeywordChange}
+          onCheck={colorPhrase}
           phrases={data.phrases}/>
+        <textarea
+          rows="20"
+          value={data.export_area}
+        />
       </div>
     );
   }
@@ -75,6 +81,9 @@ const mapDispatchToProps = dispatch => ({
   },
   generateTable: (input_area, template) => {
     dispatch(AC.generateTable(input_area, template))
+  },
+  colorPhrase: (hash) => {
+    dispatch(AC.colorPhrase(hash))
   }
 })
 

@@ -2,12 +2,12 @@ import React from 'react';
 
 import Phrase from "./Phrase/Phrase.js";
 
-const Rows = ({phrases, onKeywordChange, remarkWord}) => {
+const Rows = ({phrases, onKeywordChange, remarkWord, onCheck}) => {
   let row_array = [];
 
   const createRow = (phrase, idx) => {
     return (
-      <tr key={idx}>
+      <tr key={idx} className={phrase.colored ? "colored" : "default"}>
         <td className="templater__table_keyword">
           <input
             className="templater__table_input"
@@ -15,6 +15,9 @@ const Rows = ({phrases, onKeywordChange, remarkWord}) => {
             value={phrase.keyword} />
         </td>
         <td>
+          <input type="checkbox"
+                 onClick={e => onCheck(idx)} 
+                 checked={phrase.colored}/>
           <Phrase phrase={phrase}
                   hash={idx}
                   remarkWord={remarkWord}/>

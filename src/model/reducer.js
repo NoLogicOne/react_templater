@@ -38,6 +38,15 @@ export const phrases = (state = data.phrases, action) => {
 			}
 
 			return result
+		
+		case types.COLOR_PHRASE:
+			return _phraseExecute(state, hash, (phrase) => {
+				let colored = !phrase.colored
+				return {
+					...phrase,
+					colored
+				}
+			})
 
 		default:
 			return state
@@ -63,7 +72,13 @@ export const template = (state = data.template, action) => {
 }
 
 export const export_area = (state = data.export_area, action) => {
+	let {hash} = action
+
 	switch (action.type) {
+		case types.COLOR_PHRASE:
+			return state 
+			// + "\n" + phrases[hash].keyword + " " + phrases[hash].minuses
+
 		default:
 			return state
 	}
@@ -178,21 +193,9 @@ const _setTitle = (phrases, hash, based_template) => {
 const _setMarker = (keyword, word) => {
 	return keyword
 		.split(" ")
-		.reduce((acc, curr, idx, keys) => {
-			let logObj = {}
-			logObj["keys[idx]"] = keys[idx]
-			logObj["curr"] = curr
-			logObj["acc"] = acc
-			logObj["word"] = word
-			logObj["isEqualWords()"] = isEqualWords(word, curr)
-			
-			if(word === "питер"){
-
-				console.dir(logObj)
-			}
-
-			return acc || isEqualWords(word, curr) 
-	}, false)
+		.reduce((acc, curr, idx, keys) => 
+			acc || isEqualWords(word, curr), 
+		false)
 }
 
 const pastePhraseInTemplate = (phrase, based_template) => {
@@ -264,6 +267,6 @@ const ends = [
 	"ему", "ыми", "ими", "ому", "ого", "ому", "ему",
 	"им", "ым", "ей", "ой", "ою", "юю", "ые", "ых", "их",
 	"ые", "ие", "ом", "ем", "ая", "ое",
-	"о"
+	"о", "а", "я", "е"
 ]
 

@@ -1,7 +1,20 @@
 .templater__table{
-  
 }
+
+.templater__table tr{
+  border: 1px solid grey;
+}
+
+.templater__table .colored{
+	background-color: grey;	
+}
+
 
 .templater__table_input{
 	width: 100%;
+}
+
+input[type="checkbox"]{
+	float: left;
+	height: inherit;
 }

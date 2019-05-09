@@ -18,7 +18,7 @@ const Phrase = ({phrase, hash, remarkWord}) => {
 
     return (
   		<div className="templater__phrase">
-              {createWords(phrase)}
+        {createWords(phrase)}
   		</div>
     );
 }

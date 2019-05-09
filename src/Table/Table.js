@@ -2,6 +2,8 @@ import React from 'react';
 
 import Rows from "./Rows/Rows.js";
 
+import "./Table.css";
+
 const Table = (props) => {
     return (
       <table className="templater__table">
