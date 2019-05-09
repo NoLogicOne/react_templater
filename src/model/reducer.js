@@ -157,14 +157,15 @@ const setPhraseDepencies = (phrases, hash, based_template) => {
 const _setTitle = (phrases, hash, based_template) => {
 	
 	return _phraseExecute(phrases, hash, (phrase) => {
-		let {text} = pastePhraseInTemplate(phrase.keyword, based_template)
+		let {keyword} = phrase
+		let {text} = pastePhraseInTemplate(keyword, based_template)
 		
 		let new_words = text
 			.split(" ")
 			.filter(w => w !== "")
 			.map(word => ({
 				word,
-				marker: false	
+				marker: _setMarker(keyword, word)
 			}))
 
 		return {
@@ -172,6 +173,26 @@ const _setTitle = (phrases, hash, based_template) => {
 			words: new_words
 		}
 	})
+}
+
+const _setMarker = (keyword, word) => {
+	return keyword
+		.split(" ")
+		.reduce((acc, curr, idx, keys) => {
+			let logObj = {}
+			logObj["keys[idx]"] = keys[idx]
+			logObj["curr"] = curr
+			logObj["acc"] = acc
+			logObj["word"] = word
+			logObj["isEqualWords()"] = isEqualWords(word, curr)
+			
+			if(word === "питер"){
+
+				console.dir(logObj)
+			}
+
+			return acc || isEqualWords(word, curr) 
+	}, false)
 }
 
 const pastePhraseInTemplate = (phrase, based_template) => {
@@ -223,5 +244,26 @@ const _setLight = (phrases, hash) => {
 	})
 }
 
+const isEqualWords = (word1, word2) => {
+	return cutEnd(word1) === cutEnd(word2)
+}
 
+const cutEnd = (word) => {
+	for (let i = 0, len = ends.length; i < len; i++) {
+		let end = ends[i];
+		let withoutEnd = word.substring(0, word.length - end.length)
+		let wordsEnd = word.substring(word.length - end.length)
+		if(end === wordsEnd){
+			return withoutEnd
+		}
+	}
+	return word
+}
+
+const ends = [
+	"ему", "ыми", "ими", "ому", "ого", "ому", "ему",
+	"им", "ым", "ей", "ой", "ою", "юю", "ые", "ых", "их",
+	"ые", "ие", "ом", "ем", "ая", "ое",
+	"о"
+]
 
