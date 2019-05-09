@@ -6,4 +6,4 @@ export const REMARK_WORD = "REMARK_WORD"
 export const COLOR_PHRASE = "COLOR_PHRASE"
 export const FILL_EXPORT = "FILL_EXPORT"
 
-export const MAX_LENGTH = 35;
+export const MAX_LENGTH = 45;

@@ -83,13 +83,29 @@ const _phraseExecute = (phrases, hash, callback, ...args) => {
   return hashed
 }
 
-const createPhrase = (keyword, template) => {
+const _divideKeyword = (fullKeyword) => {
+	let keyword = fullKeyword
+		.replace(/\s-.*$/, "")
+		.trim()
+	let minuses = fullKeyword
+		.replace(keyword, "")
+		.trim()
+
+	return {
+		keyword,
+		minuses
+	}
+}
+
+const createPhrase = (fullKeyword, template) => {
 	let result = {}
+	let {keyword, minuses} = _divideKeyword(fullKeyword)
+	
 	let phrase = {
 		based_template: template,
 		keyword,
 		colored: false,
-		minuses: "-nothing",
+		minuses,
 		length: 0,
 		light: 0,
 		words: []
@@ -116,6 +132,7 @@ const createPhrases = (input_area, template) => {
 		}
 	}, {})
 }
+
 const hashCode = str => {
     let hash = 0;
     if (str.length == 0) {
