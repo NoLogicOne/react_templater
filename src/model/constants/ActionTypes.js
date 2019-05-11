@@ -5,5 +5,6 @@ export const KEYWORD_CHANGE = "KEYWORD_CHANGE"
 export const REMARK_WORD = "REMARK_WORD"
 export const COLOR_PHRASE = "COLOR_PHRASE"
 export const FILL_EXPORT = "FILL_EXPORT"
+export const DELETE_EXPORT = "DELETE_EXPORT"
 
 export const MAX_LENGTH = 35;

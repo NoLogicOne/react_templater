@@ -47,3 +47,10 @@ export function colorPhrase(phrases, hash){
 		phrases
 	}
 }
+
+export function deleteExport(phrases){
+	return {
+		type: types.DELETE_EXPORT,
+		phrases
+	}
+} 

@@ -49,6 +49,15 @@ export const phrases = (state = data.phrases, action) => {
 				}
 			})
 
+		case types.DELETE_EXPORT:
+			let newState = {}
+			for (let key in state){
+				if (!state[key].colored){
+					newState[key] = state[key]
+				}
+			}
+			return newState
+
 		default:
 			return state
 	}
@@ -98,6 +107,9 @@ export const export_area = (state = data.export_area, action) => {
 						+ "\n"
 				}, "")
 				.trim()
+				
+		case types.DELETE_EXPORT:
+			return ""
 
 		default:
 			return state
@@ -289,4 +301,3 @@ const ends = [
 	"ые", "ие", "ом", "ем", "ая", "ое",
 	"о", "а", "я", "е"
 ]
-

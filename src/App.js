@@ -19,6 +19,7 @@ class App extends Component {
          onKeywordChange, //edit keywords in phrases
          generateTable, //click the Mix button
          colorPhrase, //click checkbox in rows
+         deleteExport, //delete all exported from table
          onTemplateChange} = this.props
 
     return (
@@ -42,6 +43,11 @@ class App extends Component {
           onChange={e=>e}
           value={data.export_area}
         />
+        <input type="submit" 
+               value="CLEAN IT"
+               onSubmit={e => e.preventDefault()}
+               className="templater__cleaner"
+               onClick={deleteExport}/>
       </div>
     );
   }
@@ -74,6 +80,9 @@ const mergeProps = (stateProps, dispatchProps) => {
     },
     colorPhrase: (hash) => {
       dispatch(AC.colorPhrase(data.phrases, hash))
+    },
+    deleteExport: () => {
+      dispatch(AC.deleteExport(data.phrases))
     }
   }
 }

@@ -4,7 +4,7 @@ import Word from "./Word/Word.js";
 
 import './Phrase.css';
 
-const Phrase = ({phrase, hash, remarkWord}) => {
+const Phrase = ({phrase, hash, remarkWord, onCheck}) => {
     
     const createWords = (phrase) => {
         return phrase.words.map((word, index) => (
@@ -17,7 +17,8 @@ const Phrase = ({phrase, hash, remarkWord}) => {
     }
 
     return (
-  		<div className="templater__phrase">
+  		<div className="templater__phrase"
+           onClick={e => onCheck(hash)}>
         {createWords(phrase)}
   		</div>
     );

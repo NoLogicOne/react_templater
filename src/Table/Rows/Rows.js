@@ -16,10 +16,11 @@ const Rows = ({phrases, onKeywordChange, remarkWord, onCheck}) => {
         </td>
         <td>
           <input type="checkbox"
-                 onClick={e => onCheck(idx)} 
+                 onChange={e => onCheck(idx)} 
                  checked={phrase.colored}/>
           <Phrase phrase={phrase}
                   hash={idx}
+                  onCheck={onCheck}
                   remarkWord={remarkWord}/>
         </td>
         <td className="templater__table_length">
