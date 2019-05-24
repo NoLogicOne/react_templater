@@ -24,9 +24,6 @@ class App extends Component {
 
     return (
       <div className="App">
-        <img src={logo} 
-             className="App-logo" 
-             alt="logo" />
         <Keywords onInputChange={fillImport}
                   import_area={data.import_area}/>
         <Template template={data.template}
