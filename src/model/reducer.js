@@ -123,6 +123,11 @@ export const last_template = (state = data.last_template, action) => {
 	}
 }
 
+/*
+основа для многих функций
+по паре объект фраз-хеш выполняет работу над объектом фразы
+принимает (помимо пары) колбек для работы
+*/
 const _phraseExecute = (phrases, hash, callback, ...args) => {
   let hashed = {...phrases}
   hashed[hash] = callback(hashed[hash], ...args)
@@ -133,7 +138,7 @@ const _phraseExecute = (phrases, hash, callback, ...args) => {
 /*
 разделяет фразу на ключевое слово и минус слова
 принимает запись из поля для ввода ключевиков
-возвращает объект, содержащий 
+возвращает объект, содержащий ключевую фразу без минус слов и минусы раздельно)
 */
 const _divideKeyword = (fullKeyword) => {
 	let keyword = fullKeyword
@@ -149,6 +154,7 @@ const _divideKeyword = (fullKeyword) => {
 	}
 }
 
+/*создает объект фразы по ключевой фразе и шаблону*/
 const createPhrase = (fullKeyword, template) => {
 	let result = {}
 	let {keyword, minuses} = _divideKeyword(fullKeyword)
@@ -167,6 +173,8 @@ const createPhrase = (fullKeyword, template) => {
 	return result
 }
 
+/*принимает значение поля для ввода и шаблон, 
+возвращает готовый объект фраз*/
 const createPhrases = (input_area, template) => {
 	let keywords = input_area
 		.split(/(\n|,)/g)
@@ -201,6 +209,8 @@ const hashCode = str => {
     return hash;
 }
 
+/*объединеие небольшого количества магии для удобной работы
+комбо _setLength и _setLight*/
 const setPhraseDepencies = (phrases, hash, based_template) => {
 	let result = {...phrases}
 	result = _setLength(result, hash, based_template)
@@ -209,6 +219,9 @@ const setPhraseDepencies = (phrases, hash, based_template) => {
 	return result
 }
 
+/*устанавливает заголовок объявления 
+принимает пару объет фраз-хеш и шаблон
+возвращает новый объект фраз*/
 const _setTitle = (phrases, hash, based_template) => {
 	
 	return _phraseExecute(phrases, hash, (phrase) => {
@@ -230,14 +243,20 @@ const _setTitle = (phrases, hash, based_template) => {
 	})
 }
 
+/*проверяет, есть ли в ключевой фразе слова, одинаковые по смыслу сбазовым словом объекта WORD
+принимает ключевую фразу и слово 
+возвращает булевое значение (да/нет)*/
 const _setMarker = (keyword, word) => {
 	return keyword
 		.split(" ")
-		.reduce((acc, curr, idx, keys) => 
+		.reduce((acc, curr) => 
 			acc || isEqualWords(word, curr), 
 		false)
 }
 
+/*принимает фразу и шаблон для ключевого слова
+возвращает фразу, вставленную в шаблон (не длиннее MAX_LENGTH)
+и длину фразы, вставленную в шаблон*/
 const pastePhraseInTemplate = (phrase, based_template) => {
 	let text = based_template.replace(/#(.)*#/, phrase)
 	let len = text
@@ -254,6 +273,8 @@ const pastePhraseInTemplate = (phrase, based_template) => {
 	}
 }
 
+/*определяет и устанавливает длину фразы(реальную) 
+по паре объект фраз-хеш и шаблону*/
 const _setLength = (phrases, hash, b_template) => {
 	return _phraseExecute(phrases, hash, (phrase) => {
 		let {len} = pastePhraseInTemplate(phrase.keyword, b_template)
@@ -264,6 +285,13 @@ const _setLength = (phrases, hash, b_template) => {
 	})
 }
 
+/*
+принимает объект фраз и хеш фразы, 
+над коорой производится действие
+определяет суммарную длину жирных слов +1
+определяет суммарную длину всех слов +1
+возвращает объект фраз(для редьюсера) с установленным значением жирности
+*/
 const _setLight = (phrases, hash) => {
 	return _phraseExecute(phrases, hash, (phrase) => {
 		let bolderLength = phrase
@@ -287,10 +315,17 @@ const _setLight = (phrases, hash) => {
 	})
 }
 
+/*принимает два слова
+возвращает результат сравнения по смыслу (без учета окончания)*/
 const isEqualWords = (word1, word2) => {
 	return cutEnd(word1) === cutEnd(word2)
 }
 
+/*
+отрезает у принимаемого слова окончание для определения 
+одинаковых по смыслу слов
+возвращает слово без окончания
+*/
 const cutEnd = (word) => {
 	for (let i = 0, len = ends.length; i < len; i++) {
 		let end = ends[i];

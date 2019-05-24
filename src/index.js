@@ -12,7 +12,30 @@ import * as serviceWorker from './serviceWorker'
 import './index.css'
 
 const reducer = combineReducers(reducers, data)
-const store = createStore(reducer)
+const store = createStore(reducer, loadState())
+
+const saveState = () => {
+	let saved = JSON.stringify(store.getState())
+	if(!localStorage.templater){
+		localStorage.setItem("templater", saved)
+	} else {
+		localStorage.templater = saved
+	}
+}
+
+function loadState() {
+	let loaded = data
+
+	if(localStorage.templater !== undefined){
+		loaded = JSON.parse(localStorage.templater)
+	}
+
+	return loaded
+}
+
+store.subscribe( () => {
+	saveState()
+})
 
 ReactDOM.render(
 	<Provider store={store}>
