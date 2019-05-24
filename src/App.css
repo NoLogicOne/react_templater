@@ -1,6 +1,18 @@
 *{
-  overflow-x: hidden;
-  padding: 0;
+  width: calc(100vw-17px);
+}
+
+::-webkit-scrollbar-track{
+  margin-left: -17px;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: #f0f0f0;
+  margin-left: -17px;
+}
+
+::-webkit-scrollbar{
+  margin-left: -17px;
 }
 
 .App {
@@ -8,12 +20,6 @@
   display: grid;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 70px;
-  pointer-events: none;
-  display: inline-block;
-}
 
 .templater__cleaner:hover{
   background-color: grey;
@@ -22,6 +28,9 @@
   transition: all .2s;
 }
 .templater__cleaner{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   -webkit-transition: all .2s;
   -o-transition: all .2s;
   transition: all .2s;
@@ -30,13 +39,4 @@
   font-size: 20px;
   height: 50px;
   cursor: pointer;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

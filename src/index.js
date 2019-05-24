@@ -33,9 +33,7 @@ function loadState() {
 	return loaded
 }
 
-store.subscribe( () => {
-	saveState()
-})
+store.subscribe(saveState)
 
 ReactDOM.render(
 	<Provider store={store}>

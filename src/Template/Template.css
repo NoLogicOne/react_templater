@@ -13,6 +13,8 @@
 .templater__template{
 	font-size: 24px;
 	width: 100vw;
+	position: sticky;
+	top: 0;
 }
 .templater__template_mix{
 	width: 10%;

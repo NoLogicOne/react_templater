@@ -23,7 +23,7 @@ class App extends Component {
          onTemplateChange} = this.props
 
     return (
-      <div className="App">
+      <div className="App" scrolling="no">
         <Keywords onInputChange={fillImport}
                   import_area={data.import_area}/>
         <Template template={data.template}
