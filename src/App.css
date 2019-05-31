@@ -1,25 +1,17 @@
-*{
-  width: calc(100vw-17px);
-}
-
 ::-webkit-scrollbar-track{
-  margin-left: -17px;
 }
 
 ::-webkit-scrollbar-thumb{
   background-color: #f0f0f0;
-  margin-left: -17px;
 }
 
 ::-webkit-scrollbar{
-  margin-left: -17px;
 }
 
 .App {
   text-align: center;
   display: grid;
 }
-
 
 .templater__cleaner:hover{
   background-color: grey;

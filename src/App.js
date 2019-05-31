@@ -41,7 +41,7 @@ class App extends Component {
           value={data.export_area}
         />
         <input type="submit" 
-               value="CLEAN IT"
+               value="EXCLUDE"
                onSubmit={e => e.preventDefault()}
                className="templater__cleaner"
                onClick={deleteExport}/>

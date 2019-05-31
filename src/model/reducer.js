@@ -64,9 +64,26 @@ export const phrases = (state = data.phrases, action) => {
 }
 
 export const import_area = (state = data.import_area, action) => {
+	let {value, phrases} = action
+
 	switch (action.type) {
 		case types.FILL_IMPORT:
-			return action.value
+			return value
+		case types.DELETE_EXPORT:
+			let newValue = []
+			
+			for(let key in phrases){
+				if(!phrases[key].colored)
+					newValue.push(
+						phrases[key].keyword
+						+ " " 
+						+ phrases[key].minuses
+					)
+			}
+
+			return newValue
+				.join("\n")
+				.trim()
 		default:
 			return state
 	}
