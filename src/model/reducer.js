@@ -65,12 +65,30 @@ export const phrases = (state = data.phrases, action) => {
 
 export const import_area = (state = data.import_area, action) => {
 	let {value, phrases} = action
+	let newValue;
 
 	switch (action.type) {
 		case types.FILL_IMPORT:
 			return value
+		
+		case types.KEYWORD_CHANGE:
+			newValue = []
+
+			for(let key in phrases){
+				newValue.push(
+					phrases[key].keyword
+					+ " " 
+					+ phrases[key].minuses
+				)
+			}
+
+			return newValue
+				.join("\n")
+				.trim()
+			
+		
 		case types.DELETE_EXPORT:
-			let newValue = []
+			newValue = []
 			
 			for(let key in phrases){
 				if(!phrases[key].colored)
@@ -92,7 +110,7 @@ export const import_area = (state = data.import_area, action) => {
 export const template = (state = data.template, action) => {
 	switch (action.type) {
 		case types.EDIT_TEMPLATE:
-			return action.value
+			return action.value.replace("№", "#")
 		default:
 			return state
 	}
@@ -358,6 +376,6 @@ const cutEnd = (word) => {
 const ends = [
 	"ему", "ыми", "ими", "ами", "ому", "ого", "ому", "ему",
 	"им", "ым", "ей", "ой", "ою", "юю", "ые", "ых", "их",
-	"ые", "ие", "ом", "ем", "ая", "ое",
+	"ые", "ие", "ом", "ем", "ая", "ое", "яя", "ую", "ый",
 	"о", "а", "я", "е"
 ]

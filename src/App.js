@@ -67,7 +67,8 @@ const mergeProps = (stateProps, dispatchProps) => {
       dispatch(AC.remarkWord(hash, word, based_template))
     },
     onKeywordChange: (hash, value, b_template) => {
-      dispatch(AC.keywordChange(hash, value, b_template))
+      let phrases = data.phrases;
+      dispatch(AC.keywordChange(hash, value, b_template, phrases))
     },
     fillImport: (value) => {
       dispatch(AC.fillImport(value))

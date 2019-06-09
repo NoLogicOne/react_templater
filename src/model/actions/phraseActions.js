@@ -23,12 +23,13 @@ export function editTemplate(value) {
 	}
 }
 
-export function keywordChange(hash, value, based_template) {
+export function keywordChange(hash, value, based_template, phrases) {
 	return {
 		type: types.KEYWORD_CHANGE,
 		hash,
 		value,
-		based_template
+		based_template,
+		phrases
 	}
 }
 
