@@ -20,6 +20,7 @@ class App extends Component {
          generateTable, //click the Mix button
          colorPhrase, //click checkbox in rows
          deleteExport, //delete all exported from table
+         reverseKeyword, //reverse keyword in a phrase
          onTemplateChange} = this.props
 
     return (
@@ -34,6 +35,7 @@ class App extends Component {
           remarkWord={remarkWord}
           onKeywordChange={onKeywordChange}
           onCheck={colorPhrase}
+          reverseKeyword={reverseKeyword}
           phrases={data.phrases}/>
         <textarea
           rows="20"
@@ -67,7 +69,7 @@ const mergeProps = (stateProps, dispatchProps) => {
       dispatch(AC.remarkWord(hash, word, based_template))
     },
     onKeywordChange: (hash, value, b_template) => {
-      let phrases = data.phrases;
+      const { phrases } = data
       dispatch(AC.keywordChange(hash, value, b_template, phrases))
     },
     fillImport: (value) => {
@@ -81,6 +83,9 @@ const mergeProps = (stateProps, dispatchProps) => {
     },
     deleteExport: () => {
       dispatch(AC.deleteExport(data.phrases))
+    },
+    reverseKeyword: (hash) => {
+      dispatch(AC.reverseKeyword(data.phrases, hash))
     }
   }
 }

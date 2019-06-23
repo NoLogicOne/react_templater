@@ -2,7 +2,12 @@ import React from 'react';
 
 import Phrase from "./Phrase/Phrase.js";
 
-const Rows = ({phrases, onKeywordChange, remarkWord, onCheck}) => {
+const Rows = ({
+  phrases, 
+  onKeywordChange, 
+  remarkWord,
+  reverseKeyword, 
+  onCheck}) => {
   let row_array = [];
 
   const createRow = (phrase, idx) => {
@@ -15,9 +20,9 @@ const Rows = ({phrases, onKeywordChange, remarkWord, onCheck}) => {
             value={phrase.keyword} />
         </td>
         <td>
-          <input type="checkbox"
-                 onChange={e => onCheck(idx)} 
-                 checked={phrase.colored}/>
+          <span onClick={e => reverseKeyword(idx)}>&hArr;</span>
+        </td>
+        <td>
           <Phrase phrase={phrase}
                   hash={idx}
                   onCheck={onCheck}

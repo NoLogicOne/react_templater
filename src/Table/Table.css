@@ -20,8 +20,3 @@
 	border-left: none;
 	font-size: 18px;
 }
-
-input[type="checkbox"]{
-	float: left;
-	height: inherit;
-}

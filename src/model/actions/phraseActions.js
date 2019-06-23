@@ -55,3 +55,11 @@ export function deleteExport(phrases){
 		phrases
 	}
 } 
+
+export function reverseKeyword(phrases, hash){
+	return {
+		type: types.REVERSE_KEYWORD,
+		phrases,
+		hash
+	}
+}

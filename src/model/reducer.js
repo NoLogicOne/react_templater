@@ -21,6 +21,8 @@ export const phrases = (state = data.phrases, action) => {
 			return setPhraseDepencies(result, hash, based_template)
 		
 		case types.KEYWORD_CHANGE:
+			if(based_template === undefined) return {...state}
+			
 			result = _phraseExecute(state, hash, (phrase) => {
 				return {
 					...phrase,
@@ -57,7 +59,19 @@ export const phrases = (state = data.phrases, action) => {
 				}
 			}
 			return newState
+		
+		case types.REVERSE_KEYWORD:
+			result = _phraseExecute(state, hash, phrase => ({
+				...phrase,
+				keyword: phrase.keyword
+					.split(" ")
+					.reverse()
+					.map(c => c.trim())
+					.join(" ")
+			}))
 
+			return _setTitle(result, hash, state[hash].based_template)
+		
 		default:
 			return state
 	}
